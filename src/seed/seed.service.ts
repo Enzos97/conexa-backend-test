@@ -4,16 +4,34 @@ import { StarWarsResponse } from './interfaces/starwars-api-res.interface';
 import { InjectModel } from '@nestjs/mongoose';
 import { Movie } from 'src/movies/entities/movie.entity';
 import { Model } from 'mongoose';
+import { User } from 'src/auth/entities/user.entity';
+import { Role } from 'src/auth/types/role.type';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class SeedService {
   constructor(
     @InjectModel(Movie.name)
     private readonly movieModel: Model<Movie>,
+    @InjectModel(User.name)
+    private readonly UserModel: Model<User>
   ){}
   private readonly axios: AxiosInstance= axios;
+  async seedAdmin(){
+    await this.UserModel.deleteMany({})
+
+    const admin = await this.UserModel.create({
+      fullName:"admin prueba local",
+      email:"admin@local.com",
+      password:bcrypt.hashSync("Admin123", 10),
+      isActive:true,
+      roles:[Role.admin]
+    })
+
+    return {message:"admin created", credential:{email:admin.email,password:"Admin123"}}
+  }
   
-  async seedExecute() {
+  async seedMoviesExecute() {
     await this.movieModel.deleteMany({})
 
     const response = await this.axios.get<StarWarsResponse>('https://swapi.py4e.com/api/films/')

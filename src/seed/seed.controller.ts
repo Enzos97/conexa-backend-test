@@ -5,8 +5,13 @@ import { SeedService } from './seed.service';
 export class SeedController {
   constructor(private readonly seedService: SeedService) {}
 
-  @Get()
+  @Get('admin')
+  seedAdminExecute() {
+    return this.seedService.seedAdmin();
+  }
+
+  @Get('movies')
   seedExecute() {
-    return this.seedService.seedExecute();
+    return this.seedService.seedMoviesExecute();
   }
 }

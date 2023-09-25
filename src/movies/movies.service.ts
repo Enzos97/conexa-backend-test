@@ -5,6 +5,7 @@ import { Model } from 'mongoose';
 import { Movie } from './entities/movie.entity';
 import { InjectModel } from '@nestjs/mongoose';
 import { CommonService } from 'src/common/common.service';
+import { User } from 'src/auth/entities/user.entity';
 
 @Injectable()
 export class MoviesService {
@@ -15,9 +16,9 @@ export class MoviesService {
     private readonly commonService: CommonService,
   ){}
 
-  async create(createMovieDto: CreateMovieDto) {
+  async create(createMovieDto: CreateMovieDto, user:User) {
     try{
-      const newMovie = await this.movieModel.create( createMovieDto )
+      const newMovie = await this.movieModel.create( {...createMovieDto, creator:user.id} )
       return newMovie
     }catch(error){
       this.commonService.handleExceptions(error);

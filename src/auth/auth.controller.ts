@@ -6,7 +6,10 @@ import { LoginUserDto } from './dto/login-user.dto';
 import { AuthGuard } from '@nestjs/passport'
 import { GetUser } from './decorators/get-user.decorator';
 import { User } from './entities/user.entity';
-import { RawHeader } from './decorators/raw-headers.decorator';
+import { UserRoleGuard } from './guards/user-role.guard';
+import { RoleProtected } from './decorators/role-protected.decorator';
+import { Role } from './types/role.type';
+
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -21,19 +24,20 @@ export class AuthController {
     return this.authService.login(loginUserDto);
   }
 
-  @Get('private')
-  @UseGuards(AuthGuard())
-  testinPrivateRoute(
+
+
+  @Get('private3')
+  @RoleProtected(Role.admin)
+  @UseGuards(AuthGuard(),UserRoleGuard)
+  testinPrivateRoute3(
     @GetUser() user:User,
-    @GetUser('email') userEmail:string,
-    @RawHeader() rawHeaders: string[]
+
   ){
     return {
       ok:true,
       message: 'pedilo',
       user,
-      userEmail,
-      rawHeaders
+
     }
   }
   @Get()

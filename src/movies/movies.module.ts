@@ -4,6 +4,7 @@ import { MoviesController } from './movies.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Movie, MovieSchema } from './entities/movie.entity';
 import { CommonModule } from 'src/common/common.module';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   controllers: [MoviesController],
@@ -15,11 +16,12 @@ import { CommonModule } from 'src/common/common.module';
         schema: MovieSchema
       }
     ]),
-    CommonModule
+    CommonModule,
+    AuthModule
   ],
   exports:[
     MoviesModule,
-    MongooseModule
+    MongooseModule,
   ]
 })
 export class MoviesModule {}
