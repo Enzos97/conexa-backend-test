@@ -16,6 +16,10 @@ import { CommonModule } from 'src/common/common.module';
       }
     ]),
     CommonModule
+  ],
+  exports:[
+    MoviesModule,
+    MongooseModule
   ]
 })
 export class MoviesModule {}

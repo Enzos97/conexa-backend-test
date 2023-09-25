@@ -1,5 +1,6 @@
 import { Document } from "mongoose";
 import { Schema, SchemaFactory, Prop } from "@nestjs/mongoose"
+import { Role } from "../types/role.type";
 
 @Schema({
     timestamps: true,
@@ -18,14 +19,16 @@ export class User extends Document {
     email:string;
     @Prop({
         required:true,
-        set: (val: string) => val.toLowerCase().trim(), get: (val: string) => val
+        set: (val: string) => val.trim(), get: (val: string) => val
     })
     password:string;
     @Prop({
         default:true
     })
     isActive:Boolean;
-    @Prop()
+    @Prop({
+        default:Role.person
+    })
     roles:string[]
 }
 

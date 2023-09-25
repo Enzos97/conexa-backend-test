@@ -1,10 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateAuthDto } from './dto/create-auth.dto';
+import { LoginUserDto } from './dto/login-user.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from './entities/user.entity';
 import { Model } from 'mongoose';
 import { CommonService } from 'src/common/common.service';
+import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class AuthService {
@@ -16,12 +18,32 @@ export class AuthService {
 
   async create(createAuthDto: CreateAuthDto) {
     try {
-      return await this.userModel.create(createAuthDto)
+      const {password, ...userData} = createAuthDto
+      const newUser = await this.userModel.create({
+        ...userData,
+        password: bcrypt.hashSync(password, 10)
+      })
+      return newUser
     } catch (error) {
       this.commonService.handleExceptions(error)
     }
   }
 
+  async login(loginUserDto:LoginUserDto){
+    try {
+      const {email, password} = loginUserDto
+      const user = await this.userModel.findOne({email})
+      if(!user){
+        throw new UnauthorizedException('email or password is invalid')
+      }
+      if(!bcrypt.compareSync(password,user.password)){
+        throw new UnauthorizedException('email or password is invalid')
+      }
+      return user
+    } catch (error) {
+      this.commonService.handleExceptions(error)
+    }
+  }
   findAll() {
     return `This action returns all auth`;
   }
