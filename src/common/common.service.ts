@@ -10,8 +10,6 @@ import { NotFoundException } from '@nestjs/common/exceptions';
 export class CommonService {
 
   handleExceptions(error: any): never {
-    console.log("error",error)
-    console.log("error mess",error.message);
 
     if (error.code === 11000) {
       throw new BadRequestException({

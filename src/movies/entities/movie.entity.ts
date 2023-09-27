@@ -1,6 +1,7 @@
 import { Document, SchemaTypes, Types } from "mongoose";
 import { Schema, SchemaFactory, Prop } from "@nestjs/mongoose"
-import { User } from "src/auth/entities/user.entity";
+import { User } from "../../auth/entities/user.entity";
+import { Category } from "../types/role.type";
 @Schema({
     timestamps: true,
   })
@@ -24,7 +25,11 @@ export class Movie extends Document {
     })
     release_year: number; 
     @Prop()
-    characters:string[]
+    characters:string[];
+    @Prop({
+        required:true
+    })
+    category:Category;
     @Prop({
         type: SchemaTypes.ObjectId,
         ref: User.name,

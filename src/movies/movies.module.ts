@@ -3,8 +3,8 @@ import { MoviesService } from './movies.service';
 import { MoviesController } from './movies.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Movie, MovieSchema } from './entities/movie.entity';
-import { CommonModule } from 'src/common/common.module';
-import { AuthModule } from 'src/auth/auth.module';
+import { CommonModule } from '../common/common.module';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   controllers: [MoviesController],

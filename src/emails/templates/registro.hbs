@@ -1,0 +1,108 @@
+<html>
+
+<head>
+    <title></title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            overflow: hidden;
+            height: auto;
+            padding: 0 10%;
+        }
+
+        .image-container img {
+            flex: 1 1 auto;
+            max-width: 30%;
+            height: auto;
+            box-shadow: 0px 0px 15px gray;
+            margin: 0.5rem;
+        }
+
+        .div-redes {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            overflow: hidden;
+            height: auto;
+            padding: 0 10%;
+        }
+
+        /* Media queries para hacer las imágenes responsivas */
+        @media screen and (max-width: 768px) {
+            .image-container {
+                /* flex-direction: column;
+                height: auto;
+                height: 50px;*/
+            }
+            .image-container img {
+                max-width: 80000px;
+            height: 10%;
+            width: 1000px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div style='background-color:#e5e5e5; width: 100%; height: auto;'>
+        <div style='background-color:#fff; width:80%;    margin-left: auto; margin-right: auto;'>
+            <center><img
+                    src='https://res.cloudinary.com/dqavzr8iu/image/upload/v1695747381/c06lyvtxtm1nocytfa1u.jpg'
+                    style='padding:30 0; width: 30%; margin-left: auto; margin-right: auto; ' /></center>
+                    <br />
+            <div style='padding: 10% 0; word-wrap: break-word;'>
+                <h1 style='padding: 0 10%; text-align:center; font-size:1.5em;'>
+                    Bienvenido {{name}}.Ya puedes utilizar nuestra platafora de peliculas y series. 
+                </h1>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <div class="image-container">
+                    <img src="https://res.cloudinary.com/dqavzr8iu/image/upload/v1695747555/1694113052551_rqk9kr.jpg" />
+                </div>
+            </div>
+        </div>
+            <div style='background-color:#e5e5e5e5; width:80%; justify-content: center; align-items: center; text-align: center;margin-left: auto; margin-right: auto;  margin-top: 10%;padding-bottom: 10%;'>
+                    <div style='justify-content: center;'>
+                        <img style='margin: 0 auto; width:30%; display: block;'
+                        src='https://res.cloudinary.com/dqavzr8iu/image/upload/v1695747555/1694113052551_rqk9kr.jpg'>
+                        <p style="text-align: center;">Siguenos en:</p>
+                    </div>
+                    <a style="text-decoration:none;" href="https://www.linkedin.com/company/longtermtechpartners/" Target="_blank">
+                        <img style='margin: 1rem 1rem 1rem 1rem ; width: 2rem; height: 2rem;' src='https://res.cloudinary.com/dqavzr8iu/image/upload/v1680018156/samples/DolarBol/linkedin_bfgm3n.png'>
+                    </a>
+                    <a style="text-decoration:none;"  href="" Target="_blank">
+                        <img style='margin: 1rem 1rem 1rem 1rem ; width: 2rem; height: 2rem;' src='https://res.cloudinary.com/dqavzr8iu/image/upload/v1680018156/samples/DolarBol/facebook_cwlm78.png'>
+                    </a>                
+                    <a style="text-decoration:none;"  href="" Target="_blank">                            
+                        <img style='margin: 1rem 1rem 1rem 1rem ; width: 2rem; height: 2rem;' src='https://res.cloudinary.com/dqavzr8iu/image/upload/v1680018156/samples/DolarBol/twitter_wf14wt.png'>
+                    </a>
+                    <a style="text-decoration:none;"  href="" Target="_blank">
+                        <img style='margin: 1rem 1rem 1rem 1rem ; width: 2.3rem; height: 2.3rem;' src='https://res.cloudinary.com/dqavzr8iu/image/upload/v1680018156/samples/DolarBol/instagram_iwj2oz.png'>
+                    </a>
+            </div>
+            <div class="div-redes">
+            </div>
+    </div>
+</body>
+
+</html>

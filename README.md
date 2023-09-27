@@ -2,71 +2,74 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
-
-```bash
-$ npm install
+# Conexa Test
+Intrucciones para levantar el proyecto localmente
+1. Clonar proyecto
+2. ```npm install```
+3. Clonar el archivo ```.env.template``` y renombrarlo a ```.env```
+4. Cambiar las variables de entorno
+5. Levantar la base de datos (debemos tener docker desktop instalado).
+```
+docker-compose up -d
 ```
 
-## Running the app
+6. Levantar: ```nest start --watch```
 
-```bash
-# development
-$ npm run start
+7. Ejecutar SEED (Documentado en Swagger)
+```
+1
+ejecutamos el endpoint para tener un usuario ADMIN 
+http://localhost:3000/api/seed/admin
+con dichas credenciales debemos loguearnos loguearnos 
+(http://localhost:3000/api/auth/login)
 
-# watch mode
-$ npm run start:dev
+2 
+utilizando el token obtenido al logearnos, nos autorizamos y ejecutamos el siguiente seed, que hace una precarga de peliculas, a partir de la api publica de Star Wars.
+http://localhost:3000/api/seed/movies
+```
+8. Testear el resto de los endpoints que fueron solicitados en Swagger.
 
-# production mode
-$ npm run start:prod
+# Api deployada
+
+```
+
+https://conexa-backend-test-pm5zvmdcta-rj.a.run.app/api
+
+El deploy de la misma, se realizo en Google Cloud, con la herramienta Cloud Run para la cual se defino un Dockerfile. Finalmente la base de datos se encuentra en MongoAtlas.
+```
+
+# Comando para ejecutar los tests:
+
 ```
 
 ## Test
-
-```bash
 # unit tests
 $ npm run test
 
-# e2e tests
-$ npm run test:e2e
+```
+# Funciones extra a las solicitadas
 
-# test coverage
-$ npm run test:cov
 ```
 
-## Support
+# Seed para la precarga de la base de datos.
+# Paginado para el endpoint GET de las peliculas.
+# Servicio para enviar Mails de bienvenida cuando se registra un nuevo usuario.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```
+## Tecnologias utilizadas
 
-## Stay in touch
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="50" alt="Nest Logo" /></a>
+    <a href="http://nestjs.com/" target="blank"><img src="https://res.cloudinary.com/dqavzr8iu/image/upload/v1695796952/pngegg_1_b1hkpc.png" width="120" alt="Mongo" /></a>
+    <a href="http://nestjs.com/" target="blank"><img src="https://res.cloudinary.com/dqavzr8iu/image/upload/v1695797082/pngegg_2_wtfbkd.png" width="60" alt="Gcloud" /></a>
+  <a href="http://nestjs.com/" target="blank"><img src="https://res.cloudinary.com/dqavzr8iu/image/upload/v1695796821/pngegg_jm0gwt.png" width="100" alt="Gcloud" /></a>
+</p>
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Contacto
+
+- Author - [enzo sanchez](https://enzos-portfolio-react.vercel.app/)
+- LinkdIn - [@Enzo Sanchez](https://www.linkedin.com/in/enzo-sanchez-733b85165/)
 
 ## License
 

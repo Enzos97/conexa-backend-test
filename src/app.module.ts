@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { MoviesModule } from './movies/movies.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CommonModule } from './common/common.module';
 import { AuthModule } from './auth/auth.module';
 import { SeedModule } from './seed/seed.module';
 import { ConfigModule } from '@nestjs/config';
+import { EmailsModule } from './emails/emails.module';
 @Module({
   imports: [
     ConfigModule.forRoot({isGlobal: true}),
@@ -14,9 +13,10 @@ import { ConfigModule } from '@nestjs/config';
     MoviesModule,
     CommonModule,
     AuthModule,
-    SeedModule
+    SeedModule,
+    EmailsModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

@@ -1,15 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
 import { LoginUserDto } from './dto/login-user.dto';
-import { AuthGuard } from '@nestjs/passport'
-import { GetUser } from './decorators/get-user.decorator';
-import { User } from './entities/user.entity';
-import { UserRoleGuard } from './guards/user-role.guard';
-import { RoleProtected } from './decorators/role-protected.decorator';
-import { Role } from './types/role.type';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -22,41 +17,5 @@ export class AuthController {
   @Post('login')
   login(@Body() loginUserDto: LoginUserDto){
     return this.authService.login(loginUserDto);
-  }
-
-
-
-  @Get('private3')
-  @RoleProtected(Role.admin)
-  @UseGuards(AuthGuard(),UserRoleGuard)
-  testinPrivateRoute3(
-    @GetUser() user:User,
-
-  ){
-    return {
-      ok:true,
-      message: 'pedilo',
-      user,
-
-    }
-  }
-  @Get()
-  findAll() {
-    return this.authService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.authService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAuthDto: UpdateAuthDto) {
-    return this.authService.update(+id, updateAuthDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.authService.remove(+id);
   }
 }

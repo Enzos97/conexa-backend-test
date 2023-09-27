@@ -4,9 +4,10 @@ import { StarWarsResponse } from './interfaces/starwars-api-res.interface';
 import { InjectModel } from '@nestjs/mongoose';
 import { Movie } from 'src/movies/entities/movie.entity';
 import { Model } from 'mongoose';
-import { User } from 'src/auth/entities/user.entity';
 import { Role } from 'src/auth/types/role.type';
 import * as bcrypt from 'bcrypt';
+import { Category } from 'src/movies/types/role.type';
+import { User } from '../auth/entities/user.entity';
 
 @Injectable()
 export class SeedService {
@@ -31,7 +32,7 @@ export class SeedService {
     return {message:"admin created", credential:{email:admin.email,password:"Admin123"}}
   }
   
-  async seedMoviesExecute() {
+  async seedMoviesExecute(user:User) {
     await this.movieModel.deleteMany({})
 
     const response = await this.axios.get<StarWarsResponse>('https://swapi.py4e.com/api/films/')
@@ -53,7 +54,9 @@ export class SeedService {
             director: director,
             release_year: release_year,
             detail:detailText,
-            characters: character
+            characters: character,
+            category:Category.MOVIE,
+            creator:user.id
           })
       )
 

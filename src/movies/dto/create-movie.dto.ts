@@ -1,4 +1,5 @@
-import { IsString, MinLength, MaxLength, IsInt, IsPositive, IsOptional, IsArray } from "class-validator";
+import { IsString, MinLength, MaxLength, IsInt, IsPositive, IsOptional, IsArray, IsIn } from "class-validator";
+import { Category, CategoryList } from "../types/role.type";
 
 export class CreateMovieDto {
     @IsString()
@@ -20,4 +21,7 @@ export class CreateMovieDto {
     @IsArray()
     @IsOptional()
     characters:string[]
+    @IsString()
+    @IsIn(CategoryList)
+    category:Category
 }

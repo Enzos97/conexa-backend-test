@@ -1,13 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
-import { ParseMongoIdPipe } from 'src/common/pipes/parse-mongo-id.pipe';
-import { Auth } from 'src/auth/decorators/auth.decorator';
-import { Role } from 'src/auth/types/role.type';
-import { GetUser } from 'src/auth/decorators/get-user.decorator';
-import { User } from 'src/auth/entities/user.entity';
+import { ParseMongoIdPipe } from '../common/pipes/parse-mongo-id.pipe';
+import { Auth } from '../auth/decorators/auth.decorator';
+import { Role } from '../auth/types/role.type';
+import { GetUser } from '../auth/decorators/get-user.decorator';
+import { User } from '../auth/entities/user.entity';
+import { PaginationDto } from '../common/dto/pagination.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Movies')
+@ApiBearerAuth()
 @Controller('movies')
 export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
@@ -23,12 +27,12 @@ export class MoviesController {
 
   @Get()
   @Auth(Role.person,Role.admin)
-  findAll() {
-    return this.moviesService.findAll();
+  findAll(@Query() paginationDto: PaginationDto) {
+    return this.moviesService.findAll(paginationDto);
   }
 
   @Get(':id')
-  @Auth(Role.person,Role.admin)
+  @Auth(Role.person)
   findOne(@Param('id', ParseMongoIdPipe) id: string) {
     return this.moviesService.findOne(id);
   }
